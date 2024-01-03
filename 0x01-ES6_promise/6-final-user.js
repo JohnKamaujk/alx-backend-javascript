@@ -10,7 +10,7 @@ async function handleProfileSignup(firstName, lastName, fileName) {
 
     return results.map((result) => ({
       status: result.status,
-      value: result.status === 'fulfilled' ? result.value : result.reason,
+      value: result.value,
     }));
   } catch (error) {
     return [{ status: 'rejected', value: error.message }];
