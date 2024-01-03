@@ -5,16 +5,12 @@ async function handleProfileSignup(firstName, lastName, fileName) {
   const userPromise = signUpUser(firstName, lastName);
   const photoPromise = uploadPhoto(fileName);
 
-  try {
-    const results = await Promise.allSettled([userPromise, photoPromise]);
+  const results = await Promise.allSettled([userPromise, photoPromise]);
 
-    return results.map((result) => ({
-      status: result.status,
-      value: result.value,
-    }));
-  } catch (error) {
-    return [{ status: 'rejected', value: error.message }];
-  }
+  return results.map((result) => ({
+    status: result.status,
+    value: result.status === 'fulfilled' ? result.value : result.reason.message,
+  }));
 }
 
 export default handleProfileSignup;
