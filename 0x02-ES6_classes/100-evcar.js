@@ -11,9 +11,6 @@ export default class EVCar extends Car {
   }
 
   set range(value) {
-    if (typeof value !== 'string') {
-      throw new TypeError('Range must be a string');
-    }
     this._range = value;
   }
 
