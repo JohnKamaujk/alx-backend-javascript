@@ -3,8 +3,8 @@
 This repository contains programs written for the Alx Backend JavaScript specialisation projects at ALX School. The specific list of projects contained are as followed:
 
 * [0x00-ES6_basic](./0x00-ES6_basic)
-* [0x00-ES6_promise](./0x00-ES6_promise)
-* [0x00-ES6_classes](./0x00-ES6_classes)
+* [0x01-ES6_promise](./0x01-ES6_promise)
+* [0x02-ES6_classes](./0x02-ES6_classes)
 
 ## Author :black_nib:
 
