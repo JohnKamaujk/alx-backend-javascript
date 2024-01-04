@@ -12,8 +12,8 @@ export default class Airport {
    * Sets the name of currency.
    */
   set name(value) {
-    if (typeof value !== "string") {
-      throw new TypeError("Name must be a string");
+    if (typeof value !== 'string') {
+      throw new TypeError('Name must be a string');
     }
     this._name = value;
   }
@@ -26,8 +26,8 @@ export default class Airport {
    * Sets the code of airport.
    */
   set code(value) {
-    if (typeof value !== "string") {
-      throw new TypeError("Code must be a string");
+    if (typeof value !== 'string') {
+      throw new TypeError('Code must be a string');
     }
     this._code = value;
   }
