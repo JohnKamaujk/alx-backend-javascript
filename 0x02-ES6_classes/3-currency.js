@@ -51,6 +51,6 @@ export default class Currency {
    * @returns {String}
    */
   displayFullCurrency() {
-    return `${this.name}(${this.code})`;
+    return `${this.name} (${this.code})`;
   }
 }
