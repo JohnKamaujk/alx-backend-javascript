@@ -1,4 +1,4 @@
-const weakMap = new WeakMap();
+export const weakMap = new WeakMap();
 
 /**
  * Increments the query count for the specified endpoint.
@@ -16,5 +16,3 @@ export function queryAPI(endpoint) {
 
   weakMap.set(endpoint, count);
 }
-
-export { weakMap };
