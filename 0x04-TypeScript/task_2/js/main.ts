@@ -11,29 +11,29 @@ export interface TeacherInterface {
 }
 
 export class Director implements DirectorInterface {
-  workFromHome() {
+  workFromHome(): string {
     return "Working from home";
   }
 
-  getCoffeeBreak() {
+  getCoffeeBreak(): string {
     return "Getting a coffee break";
   }
 
-  workDirectorTasks() {
+  workDirectorTasks(): string {
     return "Getting to director tasks";
   }
 }
 
 export class Teacher implements TeacherInterface {
-  workFromHome() {
+  workFromHome(): string {
     return "Cannot work from home";
   }
 
-  getCoffeeBreak() {
+  getCoffeeBreak(): string {
     return "Cannot have a break";
   }
 
-  workTeacherTasks() {
+  workTeacherTasks(): string {
     return "Getting to work";
   }
 }
@@ -45,15 +45,15 @@ export function createEmployee(salary: number | string): Director | Teacher {
   return new Director();
 }
 
-export function isDirector(employee: Director | Teacher) {
+export function isDirector(employee: Director | Teacher): employee is Director {
   return employee instanceof Director;
 }
 
-export function executeWork(employee: Director | Teacher) {
+export function executeWork(employee: Director | Teacher): string {
   if (isDirector(employee)) {
-    return (employee as Director).workDirectorTasks();
+    return employee.workDirectorTasks();
   }
-  return (employee as Teacher).workTeacherTasks();
+  return employee.workTeacherTasks();
 }
 
 export type Subjects = "Math" | "History";
