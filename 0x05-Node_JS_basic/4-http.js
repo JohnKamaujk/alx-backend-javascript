@@ -8,7 +8,7 @@ app.on('request', (_, res) => {
 
   res.writeHead(200, {
     'Content-Type': 'text/plain',
-    'Content-Length': Buffer.byteLength(responseText)
+    'Content-Length': responseText.length
   });
   res.write(Buffer.from(responseText));
 });
