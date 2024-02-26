@@ -12,7 +12,7 @@ app.on('request', (_, res) => {
     'Content-Length': Buffer.byteLength(responseText)
   });
   // Write the response
-  res.end(responseText);
+  res.write(Buffer.from(responseText));
 });
 
 app.listen(PORT, HOST, () => {
