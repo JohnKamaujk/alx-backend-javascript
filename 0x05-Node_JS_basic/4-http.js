@@ -6,9 +6,10 @@ const app = http.createServer();
 app.on('request', (_, res) => {
   const responseText = 'Hello Holberton School!';
 
-  res.setHeader('Content-Type', 'text/plain');
-  res.setHeader('Content-Length', responseText.length);
-  res.statusCode = 200;
+  res.writeHead(200, {
+    'Content-Type': 'text/plain',
+    'Content-Length': Buffer.byteLength(responseText)
+  });
   res.write(Buffer.from(responseText));
 });
 
