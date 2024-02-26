@@ -23,7 +23,7 @@ const countStudents = (dataPath) => {
     if (!studentGroups[field]) {
       studentGroups[field] = [];
     }
-    studentGroups[field].push(firstName.trim());
+    studentGroups[field].push(firstName);
   });
 
   const totalStudents = Object.values(studentGroups).reduce(
