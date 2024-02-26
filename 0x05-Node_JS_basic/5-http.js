@@ -53,7 +53,7 @@ app.on('request', (req, res) => {
     const responseText = 'Hello Holberton School!\n';
     res.setHeader('Content-Length', Buffer.byteLength(responseText));
     res.statusCode = 200;
-    res.end(responseText);
+    res.write(Buffer.from(responseText));
   } else if (req.url === '/students') {
     // For /students path, display student list
     const databasePath = process.argv[2];
@@ -62,11 +62,11 @@ app.on('request', (req, res) => {
         const responseText = `This is the list of our students\n${responseData}`;
         res.statusCode = 200;
         res.setHeader('Content-Length', Buffer.byteLength(responseText));
-        res.end(responseText);
+        res.write(Buffer.from(responseText));
       })
       .catch((error) => {
         res.statusCode = 500;
-        res.end('Internal Server Error');
+        res.write(Buffer.from('Internal Se)rver Error'));
         console.error(error);
       });
   } else {
@@ -74,7 +74,7 @@ app.on('request', (req, res) => {
     const responseText = 'Not Found';
     res.setHeader('Content-Length', Buffer.byteLength(responseText));
     res.statusCode = 404;
-    res.end(responseText);
+    res.write(Buffer.from(responseText));
   }
 });
 
