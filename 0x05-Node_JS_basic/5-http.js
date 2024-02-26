@@ -1,6 +1,9 @@
 const fs = require('fs').promises;
 const http = require('http');
 
+const PORT = 1245;
+const app = http.createServer();
+
 /**
  * Counts the students in a CSV data file asynchronously.
  * @param {string} dataPath - The path to the CSV data file.
@@ -41,7 +44,7 @@ const countStudents = async (dataPath) => {
   }
 };
 
-const app = http.createServer((req, res) => {
+app.on('request', (req, res) => {
   // Set response headers
   res.setHeader('Content-Type', 'text/plain');
 
@@ -75,8 +78,6 @@ const app = http.createServer((req, res) => {
   }
 });
 
-// Listen on port 1245
-const PORT = 1245;
 app.listen(PORT, () => {
   console.log(`Server is running and listening on port ${PORT}`);
 });
