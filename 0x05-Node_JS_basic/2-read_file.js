@@ -20,12 +20,10 @@ const countStudents = (dataPath) => {
 
   lines.forEach((line) => {
     const [firstName, , , field] = line.split(',');
-    if (field.trim() !== '') {
-      if (!studentGroups[field]) {
-        studentGroups[field] = [];
-      }
-      studentGroups[field].push(firstName.trim());
+    if (!studentGroups[field]) {
+      studentGroups[field] = [];
     }
+    studentGroups[field].push(firstName.trim());
   });
 
   const totalStudents = Object.values(studentGroups).reduce(
@@ -45,4 +43,4 @@ const countStudents = (dataPath) => {
 
 module.exports = countStudents;
 
-countStudents("database.csv");
+countStudents('database.csv');
