@@ -1,10 +1,5 @@
 const fs = require('fs');
 
-/**
- * Counts the students in a CSV data file synchronously.
- * @param {string} dataPath - The path to the CSV data file.
- * @throws {Error} Throws an error if the database cannot be loaded.
- */
 const countStudents = (dataPath) => {
   try {
     const fileContent = fs.readFileSync(dataPath, 'utf-8');
