@@ -10,7 +10,7 @@ app.on('request', (_, res) => {
     'Content-Type': 'text/plain',
     'Content-Length': Buffer.byteLength(responseText)
   });
-  res.end(responseText);
+  res.write(Buffer.from(responseText));
 });
 
 app.listen(PORT, HOST, () => {
