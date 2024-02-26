@@ -56,7 +56,7 @@ const app = http.createServer((req, res) => {
     const databasePath = process.argv[2];
     countStudents(databasePath)
       .then((responseData) => {
-        const responseText = `This is the list of our students\n ${responseData}`;
+        const responseText = `This is the list of our students\n${responseData}`;
         res.statusCode = 200;
         res.setHeader('Content-Length', Buffer.byteLength(responseText));
         res.end(responseText);
