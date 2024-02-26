@@ -6,7 +6,6 @@ const fs = require('fs');
  * @throws {Error} Throws an error if the database cannot be loaded.
  */
 const countStudents = (dataPath) => {
-  // Check if the file exists and is a file
   if (!fs.existsSync(dataPath) || !fs.statSync(dataPath).isFile()) {
     throw new Error('Cannot load the database');
   }
