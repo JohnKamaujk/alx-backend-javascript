@@ -3,7 +3,8 @@ const fs = require('fs').promises;
 /**
  * Counts the students in a CSV data file asynchronously.
  * @param {string} dataPath - The path to the CSV data file.
- * @returns {Promise<void>} A Promise that resolves when the counting is done or rejects with an error.
+ * @returns {Promise<void>} A Promise that resolves when the counting is done or
+ * rejects with an error.
  */
 const countStudents = async (dataPath) => {
   try {
@@ -25,14 +26,14 @@ const countStudents = async (dataPath) => {
 
     const totalStudents = Object.values(studentGroups).reduce(
       (acc, group) => acc + group.length,
-      0
+      0,
     );
     console.log(`Number of students: ${totalStudents}`);
 
     for (const field of Object.keys(studentGroups)) {
       const studentList = studentGroups[field].join(', ');
       console.log(
-        `Number of students in ${field}: ${studentGroups[field].length}. List: ${studentList}`
+        `Number of students in ${field}: ${studentGroups[field].length}. List: ${studentList}`,
       );
     }
   } catch (error) {
