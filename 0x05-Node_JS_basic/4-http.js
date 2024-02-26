@@ -9,7 +9,7 @@ app.on('request', (_, res) => {
   // Set response headers
 
   res.setHeader('Content-Type', 'text/plain');
-  res.setHeader('Content-Length', Buffer.byteLength(responseText));
+  res.setHeader('Content-Length', responseText.length);
   res.statusCode = 200;
   // Write the response
   res.write(Buffer.from(responseText));
