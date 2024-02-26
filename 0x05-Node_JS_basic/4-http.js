@@ -3,14 +3,16 @@ const PORT = 1245;
 const HOST = 'localhost';
 
 // Create HTTP server
-const app = http.createServer((_, res) => {
+const app = http.createServer();
+app.on('request', (_, res) => {
   const responseText = 'Hello Holberton School!';
   // Set response headers
-  res.setHeader('Content-Type', 'text/plain');
-  res.setHeader('Content-Length', Buffer.byteLength(responseText));
-  res.statusCode = 200;
+  res.writeHead(200, {
+    'Content-Type': 'text/plain',
+    'Content-Length': Buffer.byteLength(responseText)
+  });
   // Write the response
-  res.write(Buffer.from(responseText));
+  res.end(responseText);
 });
 
 app.listen(PORT, HOST, () => {
