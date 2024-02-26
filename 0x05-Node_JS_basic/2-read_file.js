@@ -11,7 +11,10 @@ const countStudents = (dataPath) => {
     throw new Error('Cannot load the database');
   }
 
-  const fileContent = fs.readFileSync(dataPath, 'utf-8').trim();
+  const fileContent = fs
+    .readFileSync(dataPath, 'utf-8')
+    .toString('utf-8')
+    .trim();
   const lines = fileContent.split('\n').slice(1);
 
   const studentGroups = {};
