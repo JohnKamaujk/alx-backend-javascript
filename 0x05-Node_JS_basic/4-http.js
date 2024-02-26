@@ -9,8 +9,7 @@ app.on('request', (_, res) => {
   res.writeHead(200, {
     'Content-Type': 'text/plain',
     'Content-Length': responseText.length
-  });
-  res.write(Buffer.from(responseText));
+  }).end(responseText);
 });
 
 app.listen(PORT, () => {
