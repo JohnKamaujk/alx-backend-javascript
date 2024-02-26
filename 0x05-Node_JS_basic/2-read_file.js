@@ -6,7 +6,10 @@ const fs = require('fs');
  * @author Johnny K <https://github.com/JohnKamaujk>
  */
 const countStudents = (dataPath) => {
-  if (!fs.existsSync(dataPath) || !fs.statSync(dataPath).isFile()) {
+  if (!fs.existsSync(dataPath)) {
+    throw new Error('Cannot load the database');
+  }
+  if (!fs.statSync(dataPath).isFile()) {
     throw new Error('Cannot load the database');
   }
 
