@@ -1,4 +1,6 @@
 const http = require('http');
+const PORT = 1245;
+const HOST = 'localhost';
 
 // Create HTTP server
 const app = http.createServer((_, res) => {
@@ -9,12 +11,11 @@ const app = http.createServer((_, res) => {
     'Content-Length': Buffer.byteLength(responseText)
   });
   // Write the response
-  res.end(responseText);
+  res.write(Buffer.from(responseText));
 });
 
-const PORT = 1245;
-app.listen(PORT, () => {
-  console.log(`Server is running and listening on port ${PORT}`);
+app.listen(PORT, HOST, () => {
+  process.stdout.write(`Server listening at -> http://${HOST}:${PORT}\n`);
 });
 
 module.exports = app;
