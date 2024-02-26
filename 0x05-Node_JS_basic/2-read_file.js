@@ -2,8 +2,8 @@ const fs = require('fs');
 
 /**
  * Counts the students in a CSV data file.
- * @param {string} dataPath - The path to the CSV data file.
- * @throws {Error} Throws an error if the database cannot be loaded.
+ * @param {String} dataPath The path to the CSV data file.
+ * @author Johnny K <https://github.com/JohnKamaujk>
  */
 const countStudents = (dataPath) => {
   if (!fs.existsSync(dataPath) || !fs.statSync(dataPath).isFile()) {
@@ -44,3 +44,5 @@ const countStudents = (dataPath) => {
 };
 
 module.exports = countStudents;
+
+countStudents("database.csv");
