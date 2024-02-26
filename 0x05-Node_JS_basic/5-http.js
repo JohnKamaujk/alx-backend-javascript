@@ -4,7 +4,8 @@ const http = require('http');
 /**
  * Counts the students in a CSV data file asynchronously.
  * @param {string} dataPath - The path to the CSV data file.
- * @returns {Promise<string>} A Promise that resolves with the strings representing the student counts or rejects with an error.
+ * @returns {Promise<string>} A Promise that resolves with the strings
+ * representing the student counts or rejects with an error.
  */
 const countStudents = async (dataPath) => {
   try {
@@ -25,7 +26,7 @@ const countStudents = async (dataPath) => {
 
     const totalStudents = Object.values(studentGroups).reduce(
       (acc, group) => acc + group.length,
-      0
+      0,
     );
 
     let result = `Number of students: ${totalStudents}\n`;
@@ -55,7 +56,7 @@ const app = http.createServer((req, res) => {
     const databasePath = process.argv[2];
     countStudents(databasePath)
       .then((responseData) => {
-        const responseText = 'This is the list of our students\n' + responseData;
+        const responseText = `This is the list of our students\n ${responseData}`;
         res.statusCode = 200;
         res.setHeader('Content-Length', Buffer.byteLength(responseText));
         res.end(responseText);
