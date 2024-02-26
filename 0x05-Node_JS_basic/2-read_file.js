@@ -1,49 +1,44 @@
 const fs = require('fs');
 
 /**
- * Counts the students in a CSV data file.
- * @param {String} dataPath The path to the CSV data file.
- * @author Johnny K <https://github.com/JohnKamaujk>
+ * Counts the students in a CSV data file synchronously.
+ * @param {string} dataPath - The path to the CSV data file.
+ * @throws {Error} Throws an error if the database cannot be loaded.
  */
 const countStudents = (dataPath) => {
-  if (!fs.existsSync(dataPath)) {
-    throw new Error('Cannot load the database');
-  }
-  if (!fs.statSync(dataPath).isFile()) {
-    throw new Error('Cannot load the database');
-  }
+  try {
+    const fileContent = fs.readFileSync(dataPath, 'utf-8');
+    const lines = fileContent.trim().split('\n').slice(1);
+    const studentCounts = {};
 
-  const fileContent = fs
-    .readFileSync(dataPath, 'utf-8')
-    .toString('utf-8')
-    .trim();
-  const lines = fileContent.split('\n').slice(1);
+    lines.forEach((line) => {
+      const [firstName, , , field] = line.split(',');
+      const trimmedField = field.trim();
 
-  const studentGroups = {};
+      if (trimmedField) {
+        if (!studentCounts[trimmedField]) {
+          studentCounts[trimmedField] = [];
+        }
+        studentCounts[trimmedField].push(firstName.trim());
+      }
+    });
 
-  lines.forEach((line) => {
-    const [firstName, , , field] = line.split(',');
-    if (!studentGroups[field]) {
-      studentGroups[field] = [];
-    }
-    studentGroups[field].push(firstName);
-  });
-
-  const totalStudents = Object.values(studentGroups).reduce(
-    (accumulator, group) => accumulator + group.length,
-    0
-  );
-
-  console.log(`Number of students: ${totalStudents}`);
-
-  for (const field of Object.keys(studentGroups)) {
-    const studentList = studentGroups[field].join(', ');
-    console.log(
-      `Number of students in ${field}: ${studentGroups[field].length}. List: ${studentList}`
+    const totalStudents = Object.values(studentCounts).reduce(
+      (acc, curr) => acc + curr.length,
+      0
     );
+    console.log(`Number of students: ${totalStudents}`);
+
+    for (const [field, students] of Object.entries(studentCounts)) {
+      console.log(
+        `Number of students in ${field}: ${
+          students.length
+        }. List: ${students.join(', ')}`
+      );
+    }
+  } catch (error) {
+    throw new Error('Cannot load the database');
   }
 };
 
 module.exports = countStudents;
-
-countStudents('database.csv');
