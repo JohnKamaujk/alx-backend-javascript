@@ -8,6 +8,9 @@ const fs = require('fs').promises;
  */
 const readDatabase = async (filePath) => {
   try {
+    if (!filePath) {
+      throw new Error('Cannot load the database');
+    }
     const fileContent = await fs.readFile(filePath, 'utf-8');
     const lines = fileContent.trim().split('\n').slice(1);
 

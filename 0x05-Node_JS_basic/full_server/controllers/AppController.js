@@ -5,8 +5,7 @@ class AppController {
    * @param {http.ServerResponse} res - The response object.
    */
   static getHomepage(req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello Holberton School!');
+    res.status(200).send('Hello Holberton School!');
   }
 }
 

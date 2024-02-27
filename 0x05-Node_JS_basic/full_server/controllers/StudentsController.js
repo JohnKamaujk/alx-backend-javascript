@@ -11,11 +11,18 @@ class StudentsController {
   static async getAllStudents(request, response) {
     try {
       const dataPath = process.argv[2] || '';
-      console.log(dataPath);
       const studentGroups = await readDatabase(dataPath);
+      const cmpFxn = (a, b) => {
+        if (a[0].toLowerCase() < b[0].toLowerCase()) {
+          return -1;
+        }
+        if (a[0].toLowerCase() > b[0].toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      };
 
-      const sortedGroups = Object.entries(studentGroups).sort((a, b) => a[0]
-        .toLowerCase().localeCompare(b[0].toLowerCase()));
+      const sortedGroups = Object.entries(studentGroups).sort(cmpFxn);
 
       const responseParts = ['This is the list of our students'];
 
