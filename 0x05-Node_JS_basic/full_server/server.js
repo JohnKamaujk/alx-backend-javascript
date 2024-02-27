@@ -1,5 +1,5 @@
-const express = require("express");
-const mapRoutes = require("./routes").default;
+const express = require('express');
+const mapRoutes = require('./routes').default;
 
 const app = express();
 const PORT = 1245;
@@ -9,4 +9,4 @@ app.listen(PORT, () => {
   console.log(`Server listening on PORT ${PORT}`);
 });
 
-module.exports = app;
+export default app;
