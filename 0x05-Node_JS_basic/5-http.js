@@ -54,12 +54,16 @@ app.on('request', (req, res) => {
     res.statusCode = 200;
     res.end(responseText);
   } else if (url === '/students') {
-    res.setHeader('Content-Type', 'text/plain');
-    res.statusCode = 200;
-    res.write('This is the list of our students\n');
+    const response = ['This is the list of our students'];
+
     countStudents(process.argv[2])
       .then((report) => {
-        res.end(report);
+        response.push(report);
+        const responseText = response.join('\n');
+        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Length', responseText.length);
+        res.statusCode = 200;
+        res.write(Buffer.from(responseText));
       })
       .catch((error) => {
         res.end('Error: Unable to retrieve student data');
