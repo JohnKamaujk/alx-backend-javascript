@@ -29,7 +29,9 @@ class StudentsController {
 
       for (const [field, group] of sortedGroups) {
         responseParts.push(
-          `Number of students in ${field}: ${group.length}. List: ${group.map((student) => student.firstname).join(', ')}`,
+          `Number of students in ${field}: ${group.length}. List: ${group.join(
+            ', ',
+          )}`,
         );
       }
       response.status(200).send(responseParts.join('\n'));
@@ -55,9 +57,7 @@ class StudentsController {
 
       if (Object.keys(studentGroups).includes(major)) {
         const group = studentGroups[major];
-        responseText = `List: ${group
-          .map((student) => student.firstname)
-          .join(', ')}`;
+        responseText = `List: ${group.join(', ')}`;
       }
 
       response.status(200).send(responseText);
