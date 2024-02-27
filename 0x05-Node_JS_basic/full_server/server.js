@@ -1,5 +1,5 @@
 const express = require('express');
-const mapRoutes = require('./routes').default;
+const mapRoutes = require('./routes');
 
 const app = express();
 const PORT = 1245;
