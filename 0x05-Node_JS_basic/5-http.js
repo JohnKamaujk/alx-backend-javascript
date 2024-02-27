@@ -49,9 +49,10 @@ app.on('request', (req, res) => {
 
   if (url === '/') {
     const responseText = 'Hello Holberton School!';
-    res.setHeader('Content-Type', 'text/plain');
-    res.setHeader('Content-Length', responseText.length);
-    res.statusCode = 200;
+    res.writeHead(200, {
+      'Content-Type': 'text/plain',
+      'Content-Length': Buffer.byteLength(responseText),
+    });
     res.write(Buffer.from(responseText));
   } else if (url === '/students') {
     const response = ['This is the list of our students'];
@@ -60,9 +61,10 @@ app.on('request', (req, res) => {
       .then((report) => {
         response.push(report);
         const responseText = response.join('\n');
-        res.setHeader('Content-Type', 'text/plain');
-        res.setHeader('Content-Length', responseText.length);
-        res.statusCode = 200;
+        res.writeHead(200, {
+          'Content-Type': 'text/plain',
+          'Content-Length': Buffer.byteLength(responseText),
+        });
         res.write(Buffer.from(responseText));
       })
       .catch((error) => {
@@ -70,9 +72,10 @@ app.on('request', (req, res) => {
           error instanceof Error ? error.message : error.toString(),
         );
         const responseText = response.join('\n');
-        res.setHeader('Content-Type', 'text/plain');
-        res.setHeader('Content-Length', responseText.length);
-        res.statusCode = 200;
+        res.writeHead(200, {
+          'Content-Type': 'text/plain',
+          'Content-Length': Buffer.byteLength(responseText),
+        });
         res.write(Buffer.from(responseText));
       });
   }
