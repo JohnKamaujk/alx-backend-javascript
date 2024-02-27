@@ -2,12 +2,11 @@ import readDatabase from '../utils';
 
 const VALID_MAJORS = ['CS', 'SWE'];
 
+/**
+ * Contains the student-related route handlers.
+ * @author Johnny K <https://github.com/JohnKamaujk>
+ */
 class StudentsController {
-  /**
-   * Students page.
-   * @param {http.IncomingMessage} req - The request object.
-   * @param {http.ServerResponse} res - The response object.
-   */
   static async getAllStudents(request, response) {
     try {
       const dataPath = process.argv[2] || '';
