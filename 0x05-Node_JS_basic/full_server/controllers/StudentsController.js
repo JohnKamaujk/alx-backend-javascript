@@ -14,12 +14,8 @@ class StudentsController {
       console.log(dataPath);
       const studentGroups = await readDatabase(dataPath);
 
-      console.log(studentGroups);
-
       const sortedGroups = Object.entries(studentGroups).sort((a, b) => a[0]
         .toLowerCase().localeCompare(b[0].toLowerCase()));
-
-      console.log(sortedGroups);
 
       const responseParts = ['This is the list of our students'];
 
@@ -29,8 +25,6 @@ class StudentsController {
             .join(', ')}`,
         );
       }
-      console.log(responseParts);
-
       response.status(200).send(responseParts.join('\n'));
     } catch (error) {
       response
