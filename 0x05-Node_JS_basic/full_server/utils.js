@@ -1,4 +1,4 @@
-const fs = require('fs/promises');
+const fs = require('fs').promises;
 
 /**
  * Reads the database asynchronously and returns an object of arrays of first names per fields.
