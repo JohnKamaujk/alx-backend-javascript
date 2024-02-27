@@ -1,5 +1,7 @@
 import readDatabase from '../utils';
-
+/**
+ * The list of supported majors.
+ */
 const VALID_MAJORS = ['CS', 'SWE'];
 
 /**
@@ -27,8 +29,9 @@ class StudentsController {
 
       for (const [field, group] of sortedGroups) {
         responseParts.push(
-          `Number of students in ${field}: ${group.length}. List: ${group
-            .join(', ')}`,
+          `Number of students in ${field}: ${group.length}. List: ${group.join(
+            ', ',
+          )}`,
         );
       }
       response.status(200).send(responseParts.join('\n'));
@@ -67,4 +70,3 @@ class StudentsController {
 }
 
 export default StudentsController;
-module.exports = StudentsController;
