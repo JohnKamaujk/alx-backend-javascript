@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 
 const PORT = 1245;
 const HOST = 'localhost';
+const app = http.createServer();
 
 const countStudents = async (dataPath) => {
   try {
@@ -43,7 +44,7 @@ const countStudents = async (dataPath) => {
   }
 };
 
-const app = http.createServer((req, res) => {
+app.on('request', (req, res) => {
   const { url } = req;
 
   if (url === '/') {
