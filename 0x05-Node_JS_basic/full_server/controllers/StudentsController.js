@@ -50,10 +50,13 @@ class StudentsController {
       }
 
       const studentGroups = await readDatabase(dataPath);
-      const group = studentGroups[major] || [];
+      let responseText = '';
 
-      const responseText = `List: ${group
-        .join(', ')}`;
+      if (Object.keys(studentGroups).includes(major)) {
+        const group = studentGroups[major];
+        responseText = `List: ${group.join(', ')}`;
+      }
+
       response.status(200).send(responseText);
     } catch (error) {
       response
