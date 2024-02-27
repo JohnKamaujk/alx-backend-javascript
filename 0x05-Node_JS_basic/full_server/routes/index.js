@@ -1,5 +1,5 @@
-const AppController = require('../controllers/AppController');
-const StudentsController = require('../controllers/StudentsController');
+import AppController from '../controllers/AppController';
+import StudentsController from '../controllers/StudentsController';
 
 /**
  * Binds the routes to the appropriate handler in the
@@ -12,4 +12,4 @@ const mapRoutes = (app) => {
   app.get('/students/:major', StudentsController.getAllStudentsByMajor);
 };
 
-module.exports = mapRoutes;
+export default mapRoutes;
