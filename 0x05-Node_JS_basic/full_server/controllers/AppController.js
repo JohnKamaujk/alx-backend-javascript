@@ -1,6 +1,7 @@
 /**
  * Contains the miscellaneous route handlers.
- * @author Bezaleel Olakunori <https://github.com/B3zaleel>
+ * @param {http.IncomingMessage} req - The request object.
+ * @param {http.ServerResponse} res - The response object
  */
 class AppController {
   static getHomepage(request, response) {
@@ -9,4 +10,3 @@ class AppController {
 }
 
 export default AppController;
-module.exports = AppController;
