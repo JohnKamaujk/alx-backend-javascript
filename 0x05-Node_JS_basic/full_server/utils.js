@@ -19,7 +19,7 @@ const readDatabase = async (dataPath) => {
 
     for (const line of fileLines.slice(1)) {
       const studentRecord = line.split(',');
-      const firstName = studentRecord[0]; // First column contains first names
+      const firstName = studentRecord[0];
       const field = studentRecord[studentRecord.length - 1];
 
       if (!studentGroups[field]) {
