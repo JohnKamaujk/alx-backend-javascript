@@ -1,35 +1,49 @@
-const fs = require('fs').promises;
+import fs from 'fs';
 
 /**
- * Reads the database asynchronously and returns an object of arrays of first names per fields.
- * @param {string} filePath - The path to the database file.
- * @returns {Promise<object>} A promise that resolves with an object of
- * arrays of first names per fields or rejects with an error.
+ * Reads the data of students in a CSV data file.
+ * @param {String} dataPath The path to the CSV data file.
+ * @author Bezaleel Olakunori <https://github.com/B3zaleel>
+ * @returns {Promise<{
+ *   String: {firstname: String, lastname: String, age: number}[]
+ * }>}
  */
-const readDatabase = async (filePath) => {
-  try {
-    if (!filePath) {
-      throw new Error('Cannot load the database');
-    }
-    const fileContent = await fs.readFile(filePath, 'utf-8');
-    const lines = fileContent.trim().split('\n').slice(1);
+const readDatabase = (dataPath) => new Promise((resolve, reject) => {
+  if (!dataPath) {
+    reject(new Error('Cannot load the database'));
+  }
+  if (dataPath) {
+    fs.readFile(dataPath, (err, data) => {
+      if (err) {
+        reject(new Error('Cannot load the database'));
+      }
+      if (data) {
+        const fileLines = data
+          .toString('utf-8')
+          .trim()
+          .split('\n');
+        const studentGroups = {};
+        const dbFieldNames = fileLines[0].split(',');
+        const studentPropNames = dbFieldNames
+          .slice(0, dbFieldNames.length - 1);
 
-    const studentGroups = {};
-
-    lines.forEach((line) => {
-      const [firstName, , , field] = line.split(',');
-      if (field.trim() !== '') {
-        if (!studentGroups[field]) {
-          studentGroups[field] = [];
+        for (const line of fileLines.slice(1)) {
+          const studentRecord = line.split(',');
+          const studentPropValues = studentRecord
+            .slice(0, studentRecord.length - 1);
+          const field = studentRecord[studentRecord.length - 1];
+          if (!Object.keys(studentGroups).includes(field)) {
+            studentGroups[field] = [];
+          }
+          const studentEntries = studentPropNames
+            .map((propName, idx) => [propName, studentPropValues[idx]]);
+          studentGroups[field].push(Object.fromEntries(studentEntries));
         }
-        studentGroups[field].push(firstName.trim());
+        resolve(studentGroups);
       }
     });
-
-    return studentGroups;
-  } catch (error) {
-    throw new Error('Cannot read the database');
   }
-};
+});
 
+export default readDatabase;
 module.exports = readDatabase;
