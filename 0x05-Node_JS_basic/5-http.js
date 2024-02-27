@@ -52,7 +52,7 @@ app.on('request', (req, res) => {
     res.setHeader('Content-Type', 'text/plain');
     res.setHeader('Content-Length', responseText.length);
     res.statusCode = 200;
-    res.end(responseText);
+    res.write(Buffer.from(responseText));
   } else if (url === '/students') {
     const response = ['This is the list of our students'];
 
@@ -66,12 +66,15 @@ app.on('request', (req, res) => {
         res.write(Buffer.from(responseText));
       })
       .catch((error) => {
-        res.end('Error: Unable to retrieve student data');
-        console.error(error);
+        response.push(
+          error instanceof Error ? error.message : error.toString(),
+        );
+        const responseText = response.join('\n');
+        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Length', responseText.length);
+        res.statusCode = 200;
+        res.write(Buffer.from(responseText));
       });
-  } else {
-    res.statusCode = 404;
-    res.end('Not Found');
   }
 });
 
