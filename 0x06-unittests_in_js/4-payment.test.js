@@ -10,6 +10,7 @@ describe('sendPaymentRequestToApi', () => {
     const calculateNumberStub = sinon.stub(Utils, 'calculateNumber');
 
     calculateNumberStub.returns(10);
+    sendPaymentRequestToApi(100, 20);
 
     expect(calculateNumberStub.calledWith('SUM', 100, 20)).to.be.true;
     expect(calculateNumberStub.callCount).to.equal(1);
