@@ -11,8 +11,5 @@ describe('getPaymentTokenFromAPI', () => {
         });
         done();
       })
-      .catch((error) => {
-        done(error);
-      });
   }));
 });
